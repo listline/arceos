@@ -18,7 +18,7 @@ jobs:
         components: rust-src
     - uses: Swatinem/rust-cache@v2
       with:
-        cache-target: false
+        cache-targets: false
     - name: Run unit tests
       run: make unittest_no_fail_fast
 
