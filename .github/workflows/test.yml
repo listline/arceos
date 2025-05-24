@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 env:
   qemu-version: 9.2.1
-  rust-toolchain: nightly-2025-01-18
+  rust-toolchain: nightly-2025-05-20
   arceos-apps: 'c8d8fe4'
 
 jobs:
@@ -34,6 +34,8 @@ jobs:
         toolchain: ${{ env.rust-toolchain }}
         components: rust-src
     - uses: Swatinem/rust-cache@v2
+      with:
+        cache-target: false
     - run: cargo install cargo-binutils
     - uses: ./.github/workflows/actions/setup-qemu
       with:

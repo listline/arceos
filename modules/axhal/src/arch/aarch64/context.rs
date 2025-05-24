@@ -341,9 +341,8 @@ impl TaskContext {
     }
 }
 
-#[naked]
+#[unsafe(naked)]
 unsafe extern "C" fn context_switch(_current_task: &mut TaskContext, _next_task: &TaskContext) {
-    unsafe {
         naked_asm!(
             "
             // save old context (callee-saved registers)
@@ -368,10 +367,9 @@ unsafe extern "C" fn context_switch(_current_task: &mut TaskContext, _next_task:
 
             ret",
         )
-    }
 }
 
-#[naked]
+#[unsafe(naked)]
 #[cfg(feature = "fp_simd")]
 unsafe extern "C" fn fpstate_switch(_current_fpstate: &mut FpState, _next_fpstate: &FpState) {
     naked_asm!(
